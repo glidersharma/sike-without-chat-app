@@ -1,6 +1,6 @@
 import "./topbar.css";
 import { Person, Chat, Notifications } from "@material-ui/icons";
-import { Link,useHistory } from "react-router-dom";
+import { Link,useHistory} from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
@@ -12,6 +12,7 @@ export default function Topbar() {
   function logout(){
     localStorage.clear();
     history.push('/login')
+    window.location.reload(false);
   }
   
   
@@ -25,8 +26,9 @@ export default function Topbar() {
       </div>
       <div className="topbarRight">
         <div className="topbarLinks">
-          <span className="topbarLink">Homepage</span>
-          <span className="topbarLink">Timeline</span>
+          
+          <Link to={`/`} style={{ textDecoration: "none" }}><span className="topbarLink">Homepage</span></Link>
+          <Link to={`/profile/${user.username}`} style={{ textDecoration: "none" }}><span className="topbarLink">Timelines</span></Link>
         </div>
         <div className="topbarIcons">
           <div className="topbarIconItem">
@@ -56,7 +58,7 @@ export default function Topbar() {
         </Link>
       </div>
       <Link>
-      <button onClick={logout}>logout</button></Link>
+      <button onClick={logout} id="logout" className="shareButton">logout</button></Link>
     </div>
   );
 }
